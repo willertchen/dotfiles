@@ -43,12 +43,18 @@ Use chezmoi templates (`.tmpl`) when a value differs per machine. The main varia
 
 Example: `dot_gitconfig.tmpl` can reference `{{ .chezmoi.homeDir }}` instead of hardcoding `/Users/willert`.
 
+## General Behavior
+
+**Ask before any operation.** Before editing files, running commands, or making any changes, Claude must describe the intended action and wait for explicit user approval. Do not proceed autonomously.
+
+Read-only / inspection commands that are always safe to run without asking:
+- `git status`, `git diff`, `git log`, `git show`
+- `chezmoi diff`, `chezmoi status`
+- `ls`, `cat`, reading files
+
 ## Git Operations
 
 Claude should **never** run `git add` or `git commit` autonomously. Always present the changes and let the user decide when and what to stage and commit.
-
-Safe read-only git commands Claude may run freely:
-- `git status`, `git diff`, `git log`, `git show`
 
 ## What NOT to commit
 
