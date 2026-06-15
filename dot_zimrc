@@ -28,7 +28,7 @@ zmodule zsh-users/zsh-completions --fpath src
 # Must be sourced after all modules that add completion definitions.
 zmodule completion
 # Git aliases and functions (oh-my-zsh git plugin, needs compdef from completion).
-zmodule ohmyzsh/ohmyzsh --source 'plugins/git/git.plugin.zsh'
+zmodule ohmyzsh/ohmyzsh --source 'lib/git.zsh' --source 'plugins/git/git.plugin.zsh'
 
 #
 # Modules that must be initialized last
