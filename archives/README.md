@@ -6,4 +6,4 @@ Deprecated configs, preserved for reference.
 |------|----------|-------------|
 | Warp terminal | 2026-06-13 | cmux (manaflow-ai/cmux) |
 | Oh My Zsh | 2026-06-13 | zimfw |
-| Powerlevel10k | 2026-06-13 | Starship |
+| Starship | 2026-06-15 | Powerlevel10k |
