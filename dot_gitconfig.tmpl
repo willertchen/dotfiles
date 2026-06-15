@@ -1,0 +1,13 @@
+[core]
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+[init]
+	defaultBranch = main
+[credential]
+	helper = cache
+[user]
+	name = WillertChen
+	email = willertchen@gmail.com
+
+# 在 ~/code/ 底下自動切換成公司帳號
+[includeIf "gitdir:~/code/"]
+    path = ~/.gitconfig-leju
