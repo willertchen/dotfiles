@@ -1,0 +1,14 @@
+# Git
+zmodule git
+
+# Terminal improvements
+zmodule termtitle
+zmodule input
+
+# Completions
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion
+
+# Syntax & suggestions
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions

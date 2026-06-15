@@ -1,0 +1,18 @@
+# zimfw (brew install --formula zimfw)
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source /opt/homebrew/opt/zimfw/share/zimfw.zsh init
+fi
+source ${ZIM_HOME}/init.zsh
+
+# Node (fnm)
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# Starship prompt
+eval "$(starship init zsh)"
+
+# Environment
+export HOMEBREW_NO_ASK=1  # skip confirmation prompts in brew commands
+
+# Local overrides (machine-specific / company env vars, not tracked by chezmoi)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
