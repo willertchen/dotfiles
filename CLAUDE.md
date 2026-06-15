@@ -26,10 +26,31 @@ chezmoi re-add                # sync changes made directly in $HOME back to sour
 ## Environment
 
 The target machine is macOS (Apple Silicon) with:
-- Shell: zsh + Oh My Zsh + Powerlevel10k
+- Shell: zsh + zimfw + Powerlevel10k (p10k loaded via zimfw module `romkatv/powerlevel10k`)
+- Terminal: cmux (Ghostty-based), config at `~/.config/ghostty/config`
 - Node.js via fnm
 - Homebrew at `/opt/homebrew`
 - OrbStack (Docker/Linux VMs)
+
+Note: Oh My Zsh is archived under `archives/oh-my-zsh/` and no longer active. The `ohmyzsh/ohmyzsh` git plugin is still loaded via zimfw for git aliases.
+
+## Managed Files
+
+Files currently tracked by chezmoi:
+
+```
+dot_zshrc                     → ~/.zshrc
+dot_zprofile                  → ~/.zprofile
+dot_zimrc                     → ~/.zimrc
+dot_p10k.zsh                  → ~/.p10k.zsh
+dot_gitconfig.tmpl            → ~/.gitconfig  (Go template)
+dot_gitignore_global          → ~/.gitignore_global
+dot_czrc                      → ~/.czrc
+dot_config/ghostty/config     → ~/.config/ghostty/config
+archives/                     → reference only, not deployed
+```
+
+Machine-specific overrides go in `~/.zshrc.local` (sourced at the bottom of `~/.zshrc`, not tracked by chezmoi).
 
 ## Templates
 
@@ -41,7 +62,7 @@ Use chezmoi templates (`.tmpl`) when a value differs per machine. The main varia
 {{ .chezmoi.os }}        → darwin
 ```
 
-Example: `dot_gitconfig.tmpl` can reference `{{ .chezmoi.homeDir }}` instead of hardcoding `/Users/willert`.
+`dot_gitconfig.tmpl` uses `{{ .chezmoi.homeDir }}` for `core.excludesfile` instead of hardcoding `/Users/willert`.
 
 ## General Behavior
 
