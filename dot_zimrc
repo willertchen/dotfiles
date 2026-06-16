@@ -7,11 +7,6 @@ zmodule environment
 zmodule utility
 
 #
-# Prompt
-#
-zmodule romkatv/powerlevel10k --use degit
-
-#
 # Terminal improvements
 #
 # Sets a custom terminal title.
