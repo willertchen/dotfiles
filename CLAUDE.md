@@ -26,7 +26,7 @@ chezmoi re-add                # sync changes made directly in $HOME back to sour
 ## Environment
 
 The target machine is macOS (Apple Silicon) with:
-- Shell: zsh + zimfw + Powerlevel10k (p10k loaded via zimfw module `romkatv/powerlevel10k`)
+- Shell: zsh + zimfw + Starship (Catppuccin Powerline preset)
 - Terminal: cmux (Ghostty-based), config at `~/.config/ghostty/config`
 - Node.js via fnm
 - Homebrew at `/opt/homebrew`
@@ -42,7 +42,7 @@ Files currently tracked by chezmoi:
 dot_zshrc                     → ~/.zshrc
 dot_zprofile                  → ~/.zprofile
 dot_zimrc                     → ~/.zimrc
-dot_p10k.zsh                  → ~/.p10k.zsh
+dot_config/starship.toml      → ~/.config/starship.toml
 dot_gitconfig.tmpl            → ~/.gitconfig  (Go template)
 dot_gitignore_global          → ~/.gitignore_global
 dot_czrc                      → ~/.czrc
