@@ -16,3 +16,8 @@ export HOMEBREW_NO_ASK=1  # skip confirmation prompts in brew commands
 
 # Local overrides (machine-specific / company env vars, not tracked by chezmoi)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Added by Spectra
+if [[ -z ${path[(r)$HOME/.local/bin]} ]]; then
+  path=("$HOME/.local/bin" $path)
+fi
