@@ -47,6 +47,7 @@ dot_gitconfig.tmpl            → ~/.gitconfig  (Go template)
 dot_gitignore_global          → ~/.gitignore_global
 dot_czrc                      → ~/.czrc
 dot_config/ghostty/config     → ~/.config/ghostty/config
+dot_config/claude/executable_statusline.sh → ~/.config/claude/statusline.sh  (0755, Claude Code status line)
 dot_editorconfig              → ~/.editorconfig
 archives/                     → reference only, not deployed
 ```
