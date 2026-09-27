@@ -78,14 +78,14 @@ for w in 5h 7d; do
   if [ "$w" = 5h ]; then used=$five_h_used; reset=$five_h_reset
   else used=$seven_d_used; reset=$seven_d_reset; fi
   [ -n "$used" ] || continue
-  val=$((100 - $(printf '%.0f' "$used")))
+  val=$(printf '%.0f' "$used")   # 顯示已用量；顏色仍依剩餘量判斷
   when=""
   if [ -n "$reset" ]; then
     reset=$(printf '%.0f' "$reset")
     if [ "$w" = 5h ]; then when=$(countdown $((reset - now)))
     else when=$(LC_ALL=C date -r "$reset" '+%a %H:%M' 2>/dev/null); fi
   fi
-  parts="$parts$SEP$(color_by_remain "$val")$ICON_CLOCK $w:$val%${when:+ $when}$RST"
+  parts="$parts$SEP$(color_by_remain $((100 - val)))$ICON_CLOCK $w:$val%${when:+ $when}$RST"
 done
 
 if [ -n "$cost" ]; then
