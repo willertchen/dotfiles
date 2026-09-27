@@ -4,6 +4,7 @@ input=$(cat)
 
 # ── Catppuccin Mocha（24-bit 前景色）──
 fg() { printf '\033[38;2;%d;%d;%dm' "$1" "$2" "$3"; }
+C_TEAL=$(fg 148 226 213)      # #94e2d5 repo
 C_MAUVE=$(fg 203 166 247)     # #cba6f7 model
 C_BLUE=$(fg 137 180 250)      # #89b4fa 個人帳號
 C_PEACH=$(fg 250 179 135)     # #fab387 公司帳號
@@ -17,6 +18,7 @@ BOLD=$(printf '\033[1m')
 RST=$(printf '\033[0m')
 
 # ── Nerd Font 圖示（UTF-8 八進位位元組；/bin/sh = bash 3.2 不支援 \u）──
+ICON_REPO=$(printf '\357\220\201')   # U+F401 nf-oct-repo
 ICON_USER=$(printf '\357\200\207')   # U+F007 nf-fa-user
 ICON_WORK=$(printf '\357\202\261')   # U+F0B1 nf-fa-briefcase
 ICON_CTX=$(printf '\357\213\233')    # U+F2DB nf-fa-microchip
@@ -30,6 +32,8 @@ esac
 
 # ── 一次 jq 取全部欄位（@sh 保證 eval 安全）──
 eval "$(printf '%s' "$input" | jq -r '
+  @sh "repo=\(.workspace.repo.name // "")",
+  @sh "cur_dir=\(.workspace.current_dir // .cwd // "")",
   @sh "model=\(.model.display_name // "")",
   @sh "ctx_remain=\(.context_window.remaining_percentage // "")",
   @sh "five_h_used=\(.rate_limits.five_hour.used_percentage // "")",
@@ -63,6 +67,12 @@ countdown() {
 
 SEP="$C_OVERLAY0 │ $RST"
 parts="$acct"
+
+# repo 名稱：優先用 origin remote 解析出的名稱，沒有 origin 時退回 git 根目錄名稱
+if [ -z "$repo" ] && [ -n "$cur_dir" ]; then
+  top=$(git -C "$cur_dir" rev-parse --show-toplevel 2>/dev/null) && repo=${top##*/}
+fi
+[ -n "$repo" ] && parts="$C_TEAL$ICON_REPO $repo$RST$SEP$parts"
 
 [ -n "$model" ] && parts="$parts $BOLD$C_MAUVE$model$RST"
 
