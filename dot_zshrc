@@ -22,5 +22,6 @@ if [[ -z ${path[(r)$HOME/.local/bin]} ]]; then
   path=("$HOME/.local/bin" $path)
 fi
 
-# claude for work account
+# claude: personal account uses ~/.claude, work account uses ~/.claude-work
+export CLAUDE_CONFIG_DIR="$HOME/.claude"
 alias cw="CLAUDE_CONFIG_DIR=~/.claude-work claude"
