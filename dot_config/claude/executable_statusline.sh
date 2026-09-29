@@ -25,10 +25,17 @@ ICON_CTX=$(printf '\357\213\233')    # U+F2DB nf-fa-microchip
 ICON_CLOCK=$(printf '\357\200\227')  # U+F017 nf-fa-clock
 ICON_COST=$(printf '\357\205\225')   # U+F155 nf-fa-dollar
 
-case "$CLAUDE_CONFIG_DIR" in
-  *claude-work*) acct="$C_PEACH$ICON_WORK WORK$RST" ;;
-  *)             acct="$C_BLUE$ICON_USER ME$RST" ;;
+# 帳號：依實際登入帳號的組織類型判斷（Team/Enterprise = WORK）
+# 讀不到登入資訊時，退回依 CLAUDE_CONFIG_DIR 判斷
+acct_file="${CLAUDE_CONFIG_DIR:+$CLAUDE_CONFIG_DIR/.claude.json}"
+org_type=$(jq -r '.oauthAccount.organizationType // empty' "${acct_file:-$HOME/.claude.json}" 2>/dev/null)
+case "$org_type" in
+  claude_team|claude_enterprise) is_work=1 ;;
+  ?*)                            is_work=0 ;;
+  *) case "$CLAUDE_CONFIG_DIR" in *claude-work*) is_work=1 ;; *) is_work=0 ;; esac ;;
 esac
+if [ "$is_work" = 1 ]; then acct="$C_PEACH$ICON_WORK WORK$RST"
+else acct="$C_BLUE$ICON_USER ME$RST"; fi
 
 # ── 一次 jq 取全部欄位（@sh 保證 eval 安全）──
 eval "$(printf '%s' "$input" | jq -r '
